@@ -10,14 +10,15 @@ div3.innerHTML = "3";
 const div4 = document.createElement("div");
 div4.innerHTML = "4";
 const routeTable = {
-  1: div1,
-  2: div2,
-  3: div3,
-  4: div4,
+  "/1": div1,
+  "/2": div2,
+  "/3": div3,
+  "/4": div4,
 };
 
 function route(container) {
-  const number = window.location.hash.substr(1) || 1;
+  const number = window.location.pathname;
+  console.log(number);
   const div =
     routeTable[number.toString()] || document.querySelector("#div404");
   container.innerHTML = "";
