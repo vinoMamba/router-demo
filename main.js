@@ -1,4 +1,5 @@
 import "./style.css";
+const app = document.querySelector("#app");
 
 const div1 = document.createElement("div");
 div1.innerHTML = "1";
@@ -15,14 +16,14 @@ const routeTable = {
   4: div4,
 };
 
-function route() {
+function route(container) {
   const number = window.location.hash.substr(1) || 1;
-  const app = document.querySelector("#app");
-  const div = routeTable[number.toString()];
-  app.innerHTML = "";
-  app.appendChild(div);
+  const div =
+    routeTable[number.toString()] || document.querySelector("#div404");
+  container.innerHTML = "";
+  container.appendChild(div);
 }
-route();
+route(app);
 
 window.addEventListener("hashchange", () => {
   route();
