@@ -1,29 +1,29 @@
 import "./style.css";
 
-const app = document.querySelector("#app");
-const number = window.location.hash.substr(1) || 1;
-let div = document.querySelector(`#div${number}`);
-if (div) {
-  div.style.display = "block";
-  app.appendChild(div);
-} else {
-  div = document.querySelector("#div404");
-  div.style.display = "block";
+const div1 = document.createElement("div");
+div1.innerHTML = "1";
+const div2 = document.createElement("div");
+div2.innerHTML = "2";
+const div3 = document.createElement("div");
+div3.innerHTML = "3";
+const div4 = document.createElement("div");
+div4.innerHTML = "4";
+const routeTable = {
+  1: div1,
+  2: div2,
+  3: div3,
+  4: div4,
+};
+
+function route() {
+  const number = window.location.hash.substr(1) || 1;
+  const app = document.querySelector("#app");
+  const div = routeTable[number.toString()];
+  app.innerHTML = "";
   app.appendChild(div);
 }
+route();
 
 window.addEventListener("hashchange", () => {
-  const number = window.location.hash.substr(1);
-  div = document.querySelector(`#div${number}`);
-  if (div) {
-    div.style.display = "block";
-    app.appendChild(div);
-  } else {
-    div = document.querySelector("#div404");
-    div.style.display = "block";
-    app.appendChild(div);
-  }
-  app.children[0].style.display = "none";
-  document.body.appendChild(app.children[0]);
-  app.appendChild(div);
+  route();
 });
