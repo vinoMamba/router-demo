@@ -1,6 +1,17 @@
 import "./style.css";
 const app = document.querySelector("#app");
 
+const allA = document.querySelectorAll("a.link");
+
+for (let a of allA) {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const href = a.getAttribute("href");
+    window.history.pushState(null, `page ${href}`, href);
+    onStateChange();
+  });
+}
+
 const div1 = document.createElement("div");
 div1.innerHTML = "1";
 const div2 = document.createElement("div");
@@ -26,6 +37,10 @@ function route(container) {
 }
 route(app);
 
-window.addEventListener("hashchange", () => {
-  route();
-});
+function onStateChange() {
+  route(app);
+}
+
+// window.addEventListener("hashchange", () => {
+//   route();
+// });
